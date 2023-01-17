@@ -22,8 +22,6 @@ Note that the author's name has changed from Johannes Klicpera to Johannes Gaste
 If you are interested in energy and force predictions, we now recommend our new model:  
 **[GemNet](https://github.com/TUM-DAML/gemnet_pytorch)**.
 
-## Run the code
-This repository contains a notebook for training the model (`train.ipynb`) and for generating predictions on the test set with a trained model (`predict.ipynb`). It also contains a script for training the model on a cluster with Sacred and [SEML](https://github.com/TUM-DAML/seml) (`train_seml.py`). For faster experimentation we also offer two sets of pretrained models, which you can find in the `pretrained` folder.
 
 ## DimeNet++ and TF2
 
@@ -37,10 +35,10 @@ The following table gives an overview of all MAEs:
 <img src="https://github.com/gasteigerjo/dimenet/blob/master/results_qm9_tf2_pp.svg?raw=true&sanitize=true">
 </p>
 
-## Other implementations
+<!-- ## Other implementations
 
 - [JAX & Haiku](https://github.com/tummfm/jax-dimenet)
-- [PyTorch Geometric](https://github.com/pyg-team/pytorch_geometric/blob/master/torch_geometric/nn/models/dimenet.py)
+- [PyTorch Geometric](https://github.com/pyg-team/pytorch_geometric/blob/master/torch_geometric/nn/models/dimenet.py) -->
 
 ## Architecture
 
@@ -56,7 +54,7 @@ The following table gives an overview of all MAEs:
 <img src="https://github.com/gasteigerjo/dimenet/blob/master/architecture_pp.svg?raw=true&sanitize=true">
 </p>
 
-## Requirements
+<!-- ## Requirements
 The repository uses these packages:
 
 ```
@@ -66,6 +64,29 @@ sympy>=1.5
 tensorflow>=2.1
 tensorflow_addons
 tqdm
+``` -->
+
+## Environment and Packages
+```
+git clone git@github.com:waqarahmed89/dimenet.git
+cd dimenet
+#
+conda create -y -n dimenet python=3.8
+conda activate dimenet
+conda install -y ipykernel
+ipython kernel install --user --name=dimenet
+python -m pip install --upgrade pip setuptools
+pip install --upgrade tensorflow==2.8 tensorflow_addons numpy==1.20 scipy sympy tqdm jupyterlab
+conda install -c anaconda idna
+conda install -c anaconda pyyaml
+```
+
+## Run the code
+This repository contains a notebook for training the model (`train.ipynb`) and for generating predictions on the test set with a trained model (`predict.ipynb`). It also contains a script for training the model on a cluster with Sacred and [SEML](https://github.com/TUM-DAML/seml) (`train_seml.py`). For faster experimentation we also offer two sets of pretrained models, which you can find in the `pretrained` folder.
+
+```
+# To run training in background
+jupyter nbconvert --to notebook --execute train.ipynb 
 ```
 
 ## Known issues
@@ -77,7 +98,7 @@ Unfortunately there are a few issues/bugs in the code (and paper) that we can't 
 - In TensorFlow AddOns <0.12 there is a bug when checkpointing. The earlier versions require explicitly passing the `_optimizer` variable of the `MovingAverage` optimizer. This is only relevant if you actually load checkpoints from disk and continue training ([DimeNet and DimeNet++](https://github.com/gasteigerjo/dimenet/blob/master/train_seml.py#L182)).
 - The radial basis functions in the interaction block actually use d_kj and not d_ji. The best way to fix this is by just using d_ji instead of d_kj in the SBF and leaving the RBF unchanged ([DimeNet and DimeNet++](https://github.com/gasteigerjo/dimenet/blob/master/dimenet/model/layers/interaction_pp_block.py#L59)).
 
-## Contact
+<!-- ## Contact
 Please contact j.gasteiger@in.tum.de if you have any questions.
 
 ## Cite
@@ -96,4 +117,4 @@ title = {Fast and Uncertainty-Aware Directional Message Passing for Non-Equilibr
 author = {Gasteiger, Johannes and Giri, Shankari and Margraf, Johannes T. and G{\"u}nnemann, Stephan},
 booktitle={Machine Learning for Molecules Workshop, NeurIPS},
 year = {2020} }
-```
+``` -->
